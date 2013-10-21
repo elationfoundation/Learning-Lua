@@ -70,7 +70,7 @@ Strings can be of any length. Strings must be enclosed by double quotes, single 
 Escape sequences can also be used in strings
 
     x = "The ghost said, \"Boo!\""
-    print(x) 
+    print(x)
     => The ghost said, "Boo!"
     y = "This is line 1\nThis is line 2\nThis is line 3"
     print(y) 

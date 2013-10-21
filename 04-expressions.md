@@ -92,6 +92,14 @@ Here are some examples:
     => true
     return not "Hello"
     => false
+
+Be careful though:
+  x = 1
+  if x ~= 5 then print "YES" end
+  if not x == 5 then print "YES" end
+  if not (x == 5) then print "YES" end
+  if ~(x == 5) then print "YES" end
+  
     
 Logical Assignments
 -------------------
@@ -114,3 +122,16 @@ The example above is the equivalent to `if y then x = y else x = "Hello" end`.
 
 The example above shows how we can assign the smaller value between `x` and `y` to `min`. Since `x` is less than `y`
 `min` is assigned the value of `x`. If `x` was not less than `y`, `min` would be assigned the value of `y`.
+
+This makes terniary operators kind of ugly.
+
+	error = true
+	local error_checking = error and do return "OH NOOOO!" end or next_step()
+
+What about this situation though?
+	false_me = function () return false end
+    what_am_I = true and false_me() or "WHY"
+	what_am_I = true and function () return false end or "WHY"
+	
+
+	

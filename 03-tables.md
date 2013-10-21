@@ -99,4 +99,36 @@ You can create your own database using tables by storing tables in a table.
     => Jaime
     
 Anything other than a `nil` can be a key or value. 
-    
+
+Watch out for # though:
+
+    x = {'a','b','c','d'}
+	print(#x)
+    x = {'a','b','c', nil, 'd'}
+	print(#x)
+    x = {'a','b','c', nil 'd', nil}
+    print(#x)
+
+
+The # operator doesn't count all the items in the table! Instead it finds the last integer (not-fractional number) key. Because of how it's implemented, its results are undefined if all the integer keys in the table aren't consecutive (that is, don't use it for tables used as sparse arrays).
+
+You ahve some options with table indexes:
+
+	table = {}
+    table['one'] = 1
+	table.two = 1
+	table.two == table['two']
+	table['one'] == table.one
+	
+Anything can be a key, and anything can be a value!
+
+    fun = function () print "I am a function" end
+	st = {1, 2, 3, last=4}
+	WTF = {subtable=st, check_fun = fun, times_two=function(x) return x+x end}
+	
+	print(WTF['times_two'](4))
+	print(WTF.times_two(4))
+
+	--These mean the same thing in the lua terminal
+	=WTF.subtable.last
+	return WTF.subtable.last
