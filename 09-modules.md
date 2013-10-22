@@ -60,5 +60,3 @@ Another nice thing isthat since they're ordinary tables stored in a variable, mo
 
     m = require "mymodule"
     m.foo()
-
-
