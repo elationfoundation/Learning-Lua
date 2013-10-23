@@ -128,10 +128,27 @@ This makes terniary operators kind of ugly.
 	error = true
 	local error_checking = error and do return "OH NOOOO!" end or next_step()
 
-What about this situation though?
+Turnary operators in lua also have some problem;.
+
+    x = a and b or c
+    x = a and b or c and d or e
+
+The main caveat is that if a or c evaluates to true while b or d respectively evaluate to false, then this expression will not behave exactly like the ternary operator. Here, "evaluate to false" means that the value is either false or nil, and "evaluate to true" means not evaluate to false. In the first line above, a and b or c is interpreted as (a and b) or c (because and has higher precedence than or), and if a evaluates to true, then the expression becomes b or c, and if b evaluates to false, then the expression becomes c (not b as you might want). 
+	
 	false_me = function () return false end
     what_am_I = true and false_me() or "WHY"
-	what_am_I = true and function () return false end or "WHY"
-	
+	print(what_am_I)
+	==> "WHY"
 
+You should also be very careful with short anonymous functions here, as always. A function declaration is a true statement. You much actually call teh function within the turnary operator.
+
+	what_am_I = true and function () return false end or "WHY"
+	print(what_am_I)
+	==> function: 0x81089f8
 	
+	print(what_am_I())
+	==> false
+
+	what_am_I = true and (function () return false end)() or "WHY"
+	print(what_am_I)
+	==> WHY

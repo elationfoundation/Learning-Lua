@@ -44,9 +44,9 @@ If you have an array of 5 fruits, it is simple to print out each fruit.
        grape
        lemon
 
-Let's say you do not know the contents of your array, it is still simple to print out each item.
+Let's say you do not know the contents of your array, it is still simple to print out each item. 
 
-    for i,v in ipairs(fruit) do
+    for _,v in ipairs(fruit) do
       print(v)
     end
     => apple
@@ -55,7 +55,7 @@ Let's say you do not know the contents of your array, it is still simple to prin
        grape
        lemon
 
-The example above shows the use of the `ipairs` function. This function allows you to iterate through all the items in an indexed array. the `i` and `v` variables contain the current array index and it's associated value. This is simple enough since the indexes start at 1 and gets incremented up to whatever `#fruit` may be.
+The example above shows the use of the `ipairs` function. This function allows you to iterate through all the items in an indexed array. the `_` and `v` variables contain the current array index and it's associated value. This is simple enough since the indexes start at 1 and gets incremented up to whatever `#fruit` may be. The `_` is commonly used to signify to other Lua coders that the index is unused.
 
 But what about key/value tables? Remember that tables may use indexes and/or keys to reference values. Lua makes iterating through these tables simple as well.
 
@@ -68,7 +68,18 @@ But what about key/value tables? Remember that tables may use indexes and/or key
        apples is red
        banana is yellow
 
-The example above shows the use of the `pairs` function. While `ipairs` is used for indexed arrays, `pairs` is used for key/value tables as well as indexed arrays. You should notice that the `k` variable contains the current key and we are able to get its associated value via `fruits[k]`. But you'll notice that the order of the output is not how we initialized the `fruits` table. This is because the table is not indexed and therefore has no order. Ordering our list is easy enough, though.
+You can also just call pairs with two values in the same way you used ipairs.
+	   
+    fruits = {apples="red", banana="yellow", orange="orange", grape="purple"}
+    for i,k in pairs(fruits) do
+      print(i .. " is " .. k)
+    end
+    => grape is purple
+       banana is yellow
+       apples is red
+       orange is orange
+	   
+The examplea above shows the use of the `pairs` function. While `ipairs` is used for indexed arrays, `pairs` is used for key/value tables as well as indexed arrays. You'll notice that the order of the output is not how we initialized the `fruits` table. This is because the table is not indexed and therefore has no order. Ordering our list is easy enough, though.
 
     fruits = {{apples="red"}, {banana="yellow"}, {orange="orange"}, {grape="purple"}}
     for i,v in ipairs(fruits) do
@@ -88,5 +99,3 @@ The example above shows that I created an index array of 4 items. Each item is a
 * i=2 and v={banana="yellow"}
 * k="banana" and v[k]="yellow"
 etc...
-
-
